@@ -36,12 +36,12 @@
     "pg": "^8.4.0",
     "reflect-metadata": "^0.1.10",
     "typeorm": "0.2.29",
-    "typeorm-seeding": "^1.6.1",
-    "typescript": "^4.3.5"
+    "typeorm-seeding": "^1.6.1"
   },
   "scripts": {
     "start": "ts-node src/app.ts",
-    "prod": "tsc --build && node build/app.js",
+    "build": "tsc --build",
+    "prod": "node build/app.js",
     "dev": "nodemon --exec ts-node src/app.ts",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
     "drop-schema": "npm run typeorm schema:drop",
