@@ -13,14 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const User_1 = __importDefault(require("../models/User"));
-const config_1 = __importDefault(require("../services/config"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 exports.default = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const token = req.cookies.token;
         if (!token)
             throw new Error('Invalid token');
-        const { email } = jsonwebtoken_1.default.verify(token, config_1.default.JWT_SECRET_KEY);
+        const { email } = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET_KEY);
         const user = yield User_1.default.findOne({ email });
         if (!user)
             throw new Error('Invalid token');

@@ -18,7 +18,6 @@ const User_1 = __importDefault(require("../models/User"));
 const class_validator_1 = require("class-validator");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const config_1 = __importDefault(require("../services/config"));
 const authentication_1 = __importDefault(require("../services/authentication"));
 const mapErrors_1 = require("../helpers/mapErrors");
 const router = express_1.default.Router();
@@ -66,14 +65,14 @@ router.post('/login', [], (req, res) => __awaiter(void 0, void 0, void 0, functi
             return res.status(400).json(errors);
         }
         const user = yield User_1.default.findOne({ email });
-        // const user = await User.findOne({ username })
+        // // const user = await User.findOne({ username })
         if (!user)
             return res.status(404).json({ error: 'This user does not exist' });
         const passwordMatches = yield bcrypt_1.default.compare(password, user.password);
         if (!passwordMatches)
             return res.status(401).json({ error: 'incorrect credentials ' });
-        const token = jsonwebtoken_1.default.sign({ email }, config_1.default.JWT_SECRET_KEY);
-        res.cookie('token', token, { httpOnly: true, secure: config_1.default.NODE_ENV === 'production', sameSite: 'strict', maxAge: 40000000, path: "/" });
+        const token = jsonwebtoken_1.default.sign({ email }, process.env.JWT_SECRET_KEY);
+        res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', maxAge: 40000000, path: "/" });
         return res.json(user);
     }
     catch (err) {
