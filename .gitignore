@@ -9,7 +9,7 @@ node_modules
 #build
 server/migrations
 server/dist
-build
+
 #env
 .env
 .vscode
