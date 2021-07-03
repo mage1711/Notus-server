@@ -8,7 +8,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     try{
         const token = req.cookies.token
         if(!token)throw new Error('Invalid token')
-        const {email} : any = jwt.verify(token,config.JWT_SECRET_KEY!)
+        const {email} : any = jwt.verify(token,process.env.JWT_SECRET_KEY!)
         const user = await User.findOne({email})
         if(!user)throw new Error('Invalid token')
        res.locals.user = user

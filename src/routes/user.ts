@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken'
 import config from "../services/config";
 import authentication from"../services/authentication"
 import {mapErrors} from "../helpers/mapErrors"
+import { RSA_NO_PADDING } from 'constants';
 
 const router = express.Router();
 router.get('/',  (_: Request, res: Response) => {
@@ -44,7 +45,10 @@ router.post('/register',[], async (req: Request, res: Response)=>{
 })
 
 router.post('/login',[], async (req: Request, res: Response)=>{
+
   const { email ,password } = req.body
+
+
   try{
     let errors:any ={}
     if(isEmpty(email)) errors.email ='Email should not be empty'
@@ -53,13 +57,14 @@ router.post('/login',[], async (req: Request, res: Response)=>{
       return res.status(400).json(errors)
     }
 const user = await User.findOne({email})
-// const user = await User.findOne({ username })
+
+// // const user = await User.findOne({ username })
 
 if(!user) return res.status(404).json({error: 'This user does not exist'})
 const passwordMatches = await bcrypt.compare(password,user.password)
 if(!passwordMatches) return res.status(401).json({error: 'incorrect credentials '})
-const token = jwt.sign({email},config.JWT_SECRET_KEY!)
-res.cookie('token', token,{httpOnly:true,secure: config.NODE_ENV === 'production',sameSite:'strict',maxAge:40000000,path:"/"})
+const token = jwt.sign({email},process.env.JWT_SECRET_KEY!)
+res.cookie('token', token,{httpOnly:true,secure: process.env.NODE_ENV === 'production',sameSite:'strict',maxAge:40000000,path:"/"})
 return res.json(user)
   }catch(err){
 return res.status(500).json({ error:"something went wrong"})
