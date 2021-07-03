@@ -10,7 +10,7 @@ import { subs } from './routes/subs';
 import cors from "cors";
 import vote from './routes/vote';
 const app = express();
-var port = (config.PORT || "8000");
+var port = (config.PORT || "7000");
 app.set("port", port);
 
 app.use(express.json())

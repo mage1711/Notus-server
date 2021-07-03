@@ -7,6 +7,10 @@ module.exports = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   synchronize: true,
+  ssl: {
+    rejectUnauthorized: false,
+    ca: process.env.CACERT,
+  },
   logging: process.env.NODE_ENV === 'development',
   entities: [rootDir + '/models/**/*{.ts,.js}'],
   migrations: [rootDir + '/migrations/**/*{.ts,.js}'],

@@ -24,7 +24,7 @@ const subs_1 = require("./routes/subs");
 const cors_1 = __importDefault(require("cors"));
 const vote_1 = __importDefault(require("./routes/vote"));
 const app = express_1.default();
-var port = (config_1.default.PORT || "8000");
+var port = (config_1.default.PORT || "7000");
 app.set("port", port);
 app.use(express_1.default.json());
 app.use(morgan_1.default('dev'));
