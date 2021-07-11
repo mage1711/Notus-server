@@ -49,7 +49,7 @@ router.get('/:identifier/:slug', loggedIn, async (req: Request, res: Response) =
 })
 
 router.post('/', authentication, async (req: Request, res: Response) => {
-  const { title, body, sub } = req.body
+  const { title, body, sub,mediaLink } = req.body
 
   const user = res.locals.user
 
@@ -61,7 +61,7 @@ router.post('/', authentication, async (req: Request, res: Response) => {
     // find sub
     const subRecord = await Sub.findOneOrFail({ name: sub })
 
-    const post = new Post({ title, body, user, sub: subRecord })
+    const post = new Post({ title, body, user, sub: subRecord , mediaLink})
     await post.save()
 
     return res.json(post)
