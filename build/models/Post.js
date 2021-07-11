@@ -66,9 +66,17 @@ __decorate([
     __metadata("design:type", String)
 ], Post.prototype, "body", void 0);
 __decorate([
+    typeorm_1.Column({ nullable: true }),
+    __metadata("design:type", String)
+], Post.prototype, "bodyPreview", void 0);
+__decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
 ], Post.prototype, "subName", void 0);
+__decorate([
+    typeorm_1.Column({ nullable: true }),
+    __metadata("design:type", String)
+], Post.prototype, "mediaLink", void 0);
 __decorate([
     typeorm_1.ManyToOne(() => User_1.default, (user) => user.posts),
     typeorm_1.JoinColumn({ name: 'username', referencedColumnName: 'username' }),

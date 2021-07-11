@@ -37,8 +37,14 @@ export default class Post extends Entity {
   @Column({ nullable: true, type: 'text' })
   body: string
 
+  @Column({ nullable: true})
+  bodyPreview: string
+
   @Column()
   subName: string
+
+  @Column({ nullable: true})
+  mediaLink: string
 
   @ManyToOne(() => User, (user) => user.posts)
   @JoinColumn({ name: 'username', referencedColumnName: 'username' })

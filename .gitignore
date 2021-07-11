@@ -12,7 +12,7 @@ src/seeds
 .env
 .vscode
 
-
+src/migrations
 # testing
 /coverage
 

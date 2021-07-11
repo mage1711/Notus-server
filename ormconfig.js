@@ -1,4 +1,5 @@
 const rootDir = process.env.NODE_ENV === 'development' ? 'src' : 'build'
+// const rootDir = 'src'
 module.exports = {
   type: process.env.DB_TYPE,
   host: process.env.DB_HOST,
