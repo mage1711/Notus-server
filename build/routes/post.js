@@ -57,7 +57,7 @@ router.get('/:identifier/:slug', loggedIn_1.default, (req, res) => __awaiter(voi
     }
 }));
 router.post('/', authentication_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { title, body, sub } = req.body;
+    const { title, body, sub, mediaLink } = req.body;
     const user = res.locals.user;
     if (title.trim() === '') {
         return res.status(400).json({ title: 'Title must not be empty' });
@@ -65,7 +65,7 @@ router.post('/', authentication_1.default, (req, res) => __awaiter(void 0, void 
     try {
         // find sub
         const subRecord = yield Sub_1.default.findOneOrFail({ name: sub });
-        const post = new Post_1.default({ title, body, user, sub: subRecord });
+        const post = new Post_1.default({ title, body, user, sub: subRecord, mediaLink });
         yield post.save();
         return res.json(post);
     }
