@@ -72,7 +72,7 @@ router.post('/login', [], (req, res) => __awaiter(void 0, void 0, void 0, functi
         if (!passwordMatches)
             return res.status(401).json({ error: 'incorrect credentials ' });
         const token = jsonwebtoken_1.default.sign({ email }, process.env.JWT_SECRET_KEY);
-        res.cookie('token', token, { httpOnly: process.env.NODE_ENV === 'production', secure: process.env.NODE_ENV === 'production', sameSite: 'none', maxAge: 40000000, path: "/" });
+        res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'none', maxAge: 40000000, path: "/" });
         return res.json(user);
     }
     catch (err) {

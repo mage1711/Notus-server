@@ -64,7 +64,7 @@ if(!user) return res.status(404).json({error: 'This user does not exist'})
 const passwordMatches = await bcrypt.compare(password,user.password)
 if(!passwordMatches) return res.status(401).json({error: 'incorrect credentials '})
 const token = jwt.sign({email},process.env.JWT_SECRET_KEY!)
-res.cookie('token', token,{httpOnly:process.env.NODE_ENV === 'production',secure: process.env.NODE_ENV === 'production',sameSite: 'none',maxAge:40000000,path:"/"}) 
+res.cookie('token', token,{httpOnly:true,secure: process.env.NODE_ENV === 'production',sameSite: 'none',maxAge:40000000,path:"/"}) 
 return res.json(user)
   }catch(err){
 return res.status(500).json({ error:"something went wrong"})
