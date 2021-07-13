@@ -17,6 +17,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 exports.default = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const token = req.cookies.token;
+        console.log(token);
         if (!token)
             throw new Error('Invalid token');
         const { email } = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET_KEY);

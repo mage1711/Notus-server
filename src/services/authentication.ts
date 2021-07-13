@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken'
 export default async (req: Request, res: Response, next: NextFunction) => {
     try{
         const token = req.cookies.token
+        console.log(token)
         if(!token)throw new Error('Invalid token')
         const {email} : any = jwt.verify(token,process.env.JWT_SECRET_KEY!)
         const user = await User.findOne({email})
