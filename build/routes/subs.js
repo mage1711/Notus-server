@@ -54,6 +54,18 @@ router.post('/', authentication_1.default, (req, res) => __awaiter(void 0, void 
         return res.status(500).json({ error: 'Something went wrong' });
     }
 }));
+router.get('/', loggedIn_1.default, (_, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const subs = yield Sub_1.default.find({
+            relations: ['user']
+        });
+        return res.json(subs);
+    }
+    catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: 'Something went wrong' });
+    }
+}));
 router.get('/:name', loggedIn_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const name = req.params.name;
     try {
