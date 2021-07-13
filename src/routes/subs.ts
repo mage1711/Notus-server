@@ -42,7 +42,17 @@ router.post('/', authentication, async (req: Request, res: Response) => {
     return res.status(500).json({ error: 'Something went wrong' })
   }
 })
-
+router.get('/', loggedIn, async (_: Request, res: Response) => {
+  try {
+    const subs = await Sub.find({
+      relations: ['user']
+    })
+return res.json(subs)
+} catch (err) {
+  console.log(err)
+  return res.status(500).json({ error: 'Something went wrong' })
+}
+})
 router.get('/:name', loggedIn, async (req: Request, res: Response) => {
 
   const name = req.params.name
@@ -91,5 +101,6 @@ router.get('/search/:name', loggedIn, async (req: Request, res: Response) => {
     return res.status(500).json({ error: 'Something went wrong' })
   }
 })
+
 
 export { router as subs }
